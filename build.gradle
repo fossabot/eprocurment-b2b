@@ -67,9 +67,8 @@ test {
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "0f58342ba22814a901be7b37dd9978944cc7ad4f"
+        property "sonar.projectKey", "maxiplux_eprocurment-b2b"
         property "sonar.organization", "maxiplux-github"
-        property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.host.url", "https://sonarcloud.io"
     }
 }
