@@ -1,0 +1,44 @@
+version: '3.7'
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+services:
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    ports:
+      - 9090:9090
+  graphana:
+    image: grafana/grafana
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    ports:
+      - 3000:3000
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+  kafka:
+    image: johnnypark/kafka-zookeeper
+    container_name: kafka
+    restart: on-failure
+    environment:
+      ADVERTISED_HOST: 127.0.0.1
+      NUM_PARTITIONS: 10
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+
+
+
